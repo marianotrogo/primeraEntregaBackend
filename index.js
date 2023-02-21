@@ -1,73 +1,100 @@
+const fs = require("fs");
+
 class ProductManager {
-    products = [];
+    #path;
     #acumulator = 0;
 
-    addProduct(title, description, price, thumbnail, code, stock) {
-        const product = this.products.find((prod) => prod.code === code);
-        if (!product) {
-            const newProduct = {
-                id: this.#acumulator,
-                title,
-                description,
-                price,
-                thumbnail,
-                code,
-                stock,
-            };
-            this.products = [...this.products, newProduct];
-            this.#acumulator ++
 
-        } else {
-            throw new Error(`Error el producto code ${code} exists`);
+    constructor(path) {
+        this.#path = path;
+    }
+
+    async addProduct(title, description, price, thumbnail, code, stock) {
+        const products = await this.getProducts();
+
+        const productExistentes = products.find((p) => p.code === code);
+        if (productExistentes) {
+            throw new Error(`Producto con codigo${code} existe`);
+        }
+
+        const newProduct = {
+            id: this.#acumulator,
+            title,
+            description,
+            price,
+            thumbnail,
+            code,
+            stock,
+        };
+
+        const updatedProduct = [...products, newProduct];
+
+        await fs.promises.writeFile(this.#path, JSON.stringify(updatedProduct));
+
+        this.#acumulator++;
+
+        return newProduct;
+    }
+    async getProducts() {
+        try {
+            const productJSON = await fs.promises.readFile(this.#path);
+            return JSON.parse(productJSON);
+        } catch (err) {
+            return [];
         }
     }
 
-    getProducts() {
-        return this.products;
+    async getProductsById(id) {
+        const products = await this.getProducts();
+        const product = products.find((p) => p.id === id);
+
+        if (!product) {
+            throw new Error(`Not Found ${id}`);
+        }
+        return product;
     }
 
-    getProductsById(idProduct) {
-        const product = this.products.find((prod) => prod.id === idProduct);
-        if (!product) {
-            throw new Error(`Not Found`);
-        } else {
-            console.log(`El producto con ${product.id} existe`)
-            return product
-        }
+    async updateProduct(id, data) {
+        const products = await this.getProducts();
+        const updatedProducts = products.map((p) => {
+            if (p.id === id) {
+                return {
+                    ...p,
+                    ...data,
+                    id,
+                };
+            }
+            return p;
+        });
+
+        await fs.promises.writeFile(this.#path, JSON.stringify(updatedProducts));
+    }
+    async deleteProduct(id) {
+        const products = await this.getProducts();
+        const updatedProducts = products.filter((p) => {
+            return p.id !== id;
+        });
+        await fs.promises.writeFile(this.#path, JSON.stringify(updatedProducts));
     }
 }
+async function main() {
 
-const manager = new ProductManager();
-console.log(manager.getProducts());
+    const manager = new ProductManager('./productos.json');
 
-manager.addProduct(
-    "FIfa 23",
-    "PS4",
-    59,
-    "img Fifa23",
-    "1234",
-    15
-)
+    await manager.updateProduct(
+        1,
+        {
+            title: 'actualizado',
+            description: 'actualizado',
+            price: 111,
+            thumbnail: 'actualizado',
+            code: 1234,
+            stock: 9
+        }
+    );
 
-manager.addProduct(
-    "God of War Ragnarok",
-    "PS5",
-    69,
-    "img GOW Ragnarok",
-    "4321",
-    14
-)
+    console.log(await manager.getProducts());
+}
+main()
 
-manager.addProduct(
-    "Halo 5",
-    "XBOX SERIES",
-    99,
-    "img Halo5",
-    "1425",
-    16
-)
-
-console.log(manager.getProducts());
-
-manager.getProductsById(2);
-manager.getProducts(20);
+module.exports = ProductManager;
