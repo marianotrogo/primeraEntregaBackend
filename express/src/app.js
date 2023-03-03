@@ -3,12 +3,13 @@ import express from "express";
 import productManager from "./productManager.js";
 
 const app = express();
-let manager = new productManager("./productos.json");
+let manager = new productManager("./src/productos.json");
 app.get("/", (req,res)=>{
     res.send("<h1>Funcionando</h1>");
 });
 app.get("/products", async (req,res)=>{
-    res.send(manager.getProducts());
+    const products = await manager.getProducts();
+    res.send(products);
 });
 
 app.get("/products/:id", async (req,res)=>{
