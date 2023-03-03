@@ -1,5 +1,6 @@
+// const express = require ("express");
 import express from "express";
-import productManager from "./productManager";
+import productManager from "./productManager.js";
 
 const app = express();
 let manager = new productManager("./productos.json");
@@ -12,7 +13,7 @@ app.get("/products", async (req,res)=>{
 
 app.get("/products/:id", async (req,res)=>{
     let num = parseInt(req.params.id);
-    res.send(manager.getProducsById(num));
+    res.send(manager.getProductsById(num));
 })
 
 app.get("/products", async (req,res)=>{
@@ -21,4 +22,4 @@ app.get("/products", async (req,res)=>{
     res.send(product.filter((p)=>p.id < limit));
 });
 
-app.listen(8080, ()=> console.log(`Sever listengin to port 8080`));
+app.listen(8080, ()=> console.log(`Sever listening to port 8080`));

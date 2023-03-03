@@ -1,3 +1,4 @@
+// const fs = require("fs");
 import fs from "fs";
 
 class productManager {
@@ -79,22 +80,23 @@ class productManager {
 }
 async function main() {
 
-    const manager = new ProductManager('./productos.json');
+    // const manager = new productManager('./productos.json');
 
-    await manager.updateProduct(
-        1,
-        {
-            title: 'actualizado',
-            description: 'actualizado',
-            price: 111,
-            thumbnail: 'actualizado',
-            code: 1234,
-            stock: 9
-        }
-    );
+    // await manager.updateProduct(
+    //     1,
+    //     {
+    //         title: 'actualizado',
+    //         description: 'actualizado',
+    //         price: 111,
+    //         thumbnail: 'actualizado',
+    //         code: 1234,
+    //         stock: 9
+    //     }
+    // );
 
-    console.log(await manager.getProducts());
+    // console.log(await manager.getProducts());
 }
 main()
 
-module.exports = productManager;
+
+export default productManager;
