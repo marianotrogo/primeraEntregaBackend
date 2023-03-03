@@ -1,6 +1,6 @@
 import fs from "fs";
 
-class ProductManager {
+class productManager {
     #path;
     #acumulator = 0;
     
@@ -97,4 +97,4 @@ async function main() {
 }
 main()
 
-module.exports = ProductManager;
+module.exports = productManager;
