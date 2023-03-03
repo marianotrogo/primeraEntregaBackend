@@ -1,12 +1,10 @@
-// Envio para modificar para la reentrega.
-
-const fs = require("fs");
+import fs from "fs";
 
 class ProductManager {
     #path;
     #acumulator = 0;
-
-
+    
+    
     constructor(path) {
         this.#path = path;
     }
