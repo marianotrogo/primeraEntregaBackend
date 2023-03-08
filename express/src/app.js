@@ -4,7 +4,9 @@ import productManager from "./productManager.js";
 
 const app = express();
 
-app.use('/api/products', productRouter);
+app.use(express.static(__dirname + "/../public"))
+
+app.use("/api/products", productRouter);
 
 
 let manager = new productManager("./src/productos.json");
