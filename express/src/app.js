@@ -25,12 +25,4 @@ app.get("/products/:id", async (req,res)=>{
 })
 
 
-
-
-// app.get("/products", async (req,res)=>{
-//     const product = await manager.getProducts()
-//     let { limit } = req.query;
-//     res.send(product.filter((p)=>p.id < limit));
-// });
-
 app.listen(8080, ()=> console.log(`Sever listening to port 8080`));
