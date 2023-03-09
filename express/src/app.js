@@ -7,9 +7,15 @@ let manager = new productManager("./src/productos.json");
 app.get("/", (req,res)=>{
     res.send("<h1>Funcionando</h1>");
 });
+
 app.get("/products", async (req,res)=>{
-    const products = await manager.getProducts();
-    res.send(products);
+    const {limit} = req.query;
+    const productos = await manager.getProducts();
+    if(!limit){
+        await res.send(productos);
+    }
+    const filtrado = productos.splice(0,limit);
+    await res.send(filtrado);
 });
 
 app.get("/products/:id", async (req,res)=>{
@@ -18,15 +24,13 @@ app.get("/products/:id", async (req,res)=>{
     res.send(resultado);
 })
 
-// app.get("/products/:id", async (req,res)=>{
-//     const num = parseInt(req.params.id);
-//     res.send(manager.getProductsById(num));
-// })
 
-app.get("/products", async (req,res)=>{
-    const product = await manager.getProducts()
-    let { limit } = req.query;
-    res.send(product.filter((p)=>p.id < limit));
-});
+
+
+// app.get("/products", async (req,res)=>{
+//     const product = await manager.getProducts()
+//     let { limit } = req.query;
+//     res.send(product.filter((p)=>p.id < limit));
+// });
 
 app.listen(8080, ()=> console.log(`Sever listening to port 8080`));
