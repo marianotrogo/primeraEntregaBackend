@@ -13,9 +13,15 @@ app.get("/products", async (req,res)=>{
 });
 
 app.get("/products/:id", async (req,res)=>{
-    let num = parseInt(req.params.id);
-    res.send(manager.getProductsById(num));
+    const numId = await Number(req.params.id);
+    const resultado = await manager.getProductsById(numId);
+    res.send(resultado);
 })
+
+// app.get("/products/:id", async (req,res)=>{
+//     const num = parseInt(req.params.id);
+//     res.send(manager.getProductsById(num));
+// })
 
 app.get("/products", async (req,res)=>{
     const product = await manager.getProducts()
