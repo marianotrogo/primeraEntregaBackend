@@ -1,11 +1,11 @@
 [
     {
         "id": 1,
-        "title": "actualizado",
-        "description": "actualizado",
-        "price": 111,
-        "thumbnail": "actualizado",
-        "code": 1234,
+        "title": "Black Ops",
+        "description": "juego",
+        "price": 89,
+        "thumbnail": "img",
+        "code": "code5",
         "stock": 9
     },
     {
@@ -33,6 +33,60 @@
         "price": 69,
         "thumbnail": "img fifa",
         "code": "code4",
+        "stock": 9
+    },
+    {
+        "id": 5,
+        "title": "Lord of the Rings",
+        "description": "lotr",
+        "price": 12,
+        "thumbnail": "img lot",
+        "code": "code5",
+        "stock": 9
+    },
+    {
+        "id": 6,
+        "title": "Mk 11",
+        "description": "Mk 11",
+        "price": 20,
+        "thumbnail": "img mk11",
+        "code": "code6",
+        "stock": 9
+    },
+    {
+        "id": 7,
+        "title": "Nba 2k13 ",
+        "description": "nba 2k3",
+        "price": 59,
+        "thumbnail": "img nba",
+        "code": "code7",
+        "stock": 9
+    },
+    {
+        "id": 8,
+        "title": "Horizon forbidden west",
+        "description": "hfw",
+        "price": 39,
+        "thumbnail": "img horzon",
+        "code": "code8",
+        "stock": 9
+    },
+    {
+        "id": 9,
+        "title": "Gran Turismo 7",
+        "description": "GT7",
+        "price": 59,
+        "thumbnail": "img Gt7",
+        "code": "code9",
+        "stock": 9
+    },
+    {
+        "id": 10,
+        "title": "spider man miles morales",
+        "description": "sm miles",
+        "price": 99,
+        "thumbnail": "img spider",
+        "code": "code10",
         "stock": 9
     }
 ]
