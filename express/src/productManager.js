@@ -76,9 +76,6 @@ class productManager {
         await fs.promises.writeFile(this.#path, JSON.stringify(updatedProducts));
     }
 }
-// async function main() {
-// }
-// main()
 
 
 export default productManager;
