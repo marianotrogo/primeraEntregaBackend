@@ -2,7 +2,7 @@ import fs from "fs";
 
 
 class productManager {
-    #path="./src/productos.json";
+    #path="./productos.json";
     #acumulator = 0;
     
     constructor(path) {

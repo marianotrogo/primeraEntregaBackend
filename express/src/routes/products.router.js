@@ -3,7 +3,7 @@ import __dirname from "../utils.js";
 import productManager from "../productManager.js";
 
 const productsRouter = Router();
-let manager = new productManager(__dirname+"../productos.json");
+let manager = new productManager(__dirname+"/productos.json");
 productsRouter.use(json());
 
 productsRouter.get("/", async (req, res) => {
@@ -25,19 +25,19 @@ productsRouter.get("/", async (req, res) => {
 
 productsRouter.get("/:pid", async (req, res) => {
   let num = parseInt(req.params.pid);
-  const products = await manager.getProductById(num);
+  const products = await manager.getProductsById(num);
   res.send(products);
 });
 
 productsRouter.post("/", async (req, res) => {
   const { title, description, price, thumbnail, code, stock } = req.body;
-  const newProd = await manager.addProducts({
+  const newProd = await manager.addProduct({
     title,
     description,
     price,
     thumbnail,
     code,
-    stock,
+    stock
   });
   res.send(newProd);
 });
