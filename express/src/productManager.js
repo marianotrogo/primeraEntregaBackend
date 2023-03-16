@@ -10,7 +10,7 @@ class productManager {
     }
 
     async addProduct(title, description, price, thumbnail, code, stock) {
-        const products = await this.getProducts();
+        const products = await this.getProduct();
 
         const productExistentes = products.find((p) => p.code === code);
         if (productExistentes) {
