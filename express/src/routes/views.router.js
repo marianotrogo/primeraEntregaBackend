@@ -1,29 +1,18 @@
-import { Router } from "express";
+import { Router, json } from "express";
+import productManager from "../productManager";
 
-const router = Router();
+const item = new productManager();
 
-router.get('/', (req,res)=>{
-    const user = {
-        firstName: "Franco",
-        lastName: "Jalil",
-    };
-    res.render("home", user);
+const viewsRouter = Router();
 
-});
-router.get('/foods', (req,res)=>{
-    const foods=[
-        {name: "manzana", price: 20},
-        {name:"banana", price:10},
-        {name:"naranja", price:23},
-    ]
-
-    const user = {
-        firstName:"franco",
-        lastName: "jalil",
-        isAdmin: true,
-    }
-
-    res.render("foods", {foods, isAdmin: user.isAdmin})
+viewer.get("/", async(req,res)=>{
+    const prods =await item.getProducts();
+    console.log(prods);
+    res.render("home",{prods});
 })
 
-export default router;
+viewer.get('/real_time_products', (req,res)=>{
+    res.render('real_time_products');
+})
+
+export default viewsRouter;
