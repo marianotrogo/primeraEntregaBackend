@@ -40,3 +40,4 @@ socketServer.on("connection", (socket)=>{
     console.log("nuevo cliente conectado");
     socket.emit("productList", "mensaje desde el server");
 })
+
