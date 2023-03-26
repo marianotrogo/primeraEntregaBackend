@@ -88,13 +88,5 @@
         "thumbnail": "img spider",
         "code": "code10",
         "stock": 9
-    },
-    {
-        "id": 0,
-        "title": 123,
-        "description": "aaaa",
-        "price": "aaaa",
-        "code": 123,
-        "stock": 2
     }
 ]
