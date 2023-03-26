@@ -1,6 +1,6 @@
 const socket = io();
 
-const productData = document.getElementById("prodsList-display");
+const productData = document.getProductsById("prodsList-display");
 socket.on("productList", async(data)=>{
     console.log(data);
     let prodsList = "";
