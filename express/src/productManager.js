@@ -9,8 +9,15 @@ class productManager {
         this.#path = path;
     }
 
-    async addProduct(title, description, price, thumbnail, code, stock) {
-        const products = await this.getProduct();
+    async addProducts(
+        title, 
+        description, 
+        price, 
+        //thumbnail, 
+        code, 
+        stock,
+        ) {
+        const products = await this.getProducts();
 
         const productExistentes = products.find((p) => p.code === code);
         if (productExistentes) {
@@ -22,7 +29,7 @@ class productManager {
             title,
             description,
             price,
-            thumbnail,
+            // thumbnail,
             code,
             stock,
         };

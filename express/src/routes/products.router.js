@@ -29,18 +29,34 @@ productsRouter.get("/:pid", async (req, res) => {
   res.send(products);
 });
 
-productsRouter.post("/", async (req, res) => {
-  const { title, description, price, thumbnail, code, stock } = req.body;
-  const newProd = await manager.addProducts({
-    title,
-    description,
-    price,
-    thumbnail,
-    code,
-    stock,
-  });
-  res.send(newProd);
-});
+productsRouter.post("/add", async(req,res,midSocket)=>{
+  const code = Number(req.body.code);
+  const title = await req.body.title;
+  const description = await req.body.description;
+  const price = await Number(req.body.price);
+  //const thumbnail = await req.query.status;
+  const stock = await Number(req.body.stock);
+  const category = await req.body.category;
+  const test = console.log(code+title+description+price+stock+category);
+  const result = await manager.addProducts(code,title,description,price,stock,category);
+  const enviarProds = await manager.getProducts();
+  req.enviarProds = enviarProds;
+  midSocket();
+  await res.send(test)
+})
+
+// productsRouter.post("/", async (req, res) => {
+//   const { title, description, price, thumbnail, code, stock } = req.body;
+//   const newProd = await manager.addProducts({
+//     title,
+//     description,
+//     price,
+//     thumbnail,
+//     code,
+//     stock,
+//   });
+//   res.send(newProd);
+// });
 
 productsRouter.put("/:pid", async (req, res) => {
   let pid = parseInt(req.params.pid);
