@@ -5,6 +5,7 @@ import __dirname from "./utils.js";
 import { engine } from "express-handlebars";
 import viewsRouter from "./routes/views.router.js"
 import { Server, Socket } from "socket.io";
+import mongoose from 'mongoose';
 
 const app = express();
 app.use(urlencoded({extended: true}));
@@ -39,5 +40,11 @@ const socketServer = new Server(httpServer);
 socketServer.on("connection", (socket)=>{
     console.log("nuevo cliente conectado");
     socket.emit("productList", "mensaje desde el server");
-})
+});
+
+mongoose
+    .connect("mongodb+srv://mariano:mariano@backcluster.3urvzkz.mongodb.net/?retryWrites=true&w=majority")
+    .then((conn)=>{
+        console.log("Conected to 00");
+    });
 
