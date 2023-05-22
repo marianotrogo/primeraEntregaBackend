@@ -6,12 +6,14 @@ import { engine } from "express-handlebars";
 import viewsRouter from "./routes/views.router.js"
 import { Server, Socket } from "socket.io";
 import mongoose from 'mongoose';
+import userRouter from "./routes/user.router.js";
+
 
 const app = express();
 app.use(urlencoded({extended: true}));
 
 app.use(express.static(__dirname + "/../public"));
-
+app.use("/api/users", userRouter);
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views',__dirname + '/views');
@@ -44,7 +46,7 @@ socketServer.on("connection", (socket)=>{
 
 mongoose
     .connect("mongodb+srv://mariano:mariano@backcluster.3urvzkz.mongodb.net/?retryWrites=true&w=majority")
-    .then((conn)=>{
-        console.log("Conected to 00");
+    .then(conn=>{
+        console.log("Conected to DB");
     });
 
