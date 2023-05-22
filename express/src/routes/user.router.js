@@ -1,8 +1,10 @@
 import { Router } from "express";
+import userModel from "../models/users.model";
 
 const userRouter = Router();
 
-userRouter.get("/", (req,res)=>{
+userRouter.get("/", async(req,res)=>{
+    const users = await userModel.find();
     res.send({hello:"world"});
 });
 
